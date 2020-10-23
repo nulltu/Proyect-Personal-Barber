@@ -4,26 +4,29 @@ const productController ={
 
     //Cargar un producto nuevo a la BD
     addProduct : async (req, res) => {
+
+		console.log(req.body)
+		console.log(req.files)
         const {title, description, price} = req.body
         const folderImage = req.files.image
-        const nameFolderImage = "rusbent"
-        const serverURL = `${__dirname}../uploads/${nameFolderImage}`
+        const nameFolderImage = "rusbsssent.jpg"
+        const serverURL = `${__dirname}uploads/${nameFolderImage}`
         folderImage.mv(serverURL)
 
-        const productExist = await Product.findOne({title})
+        // const productExist = await Product.findOne({title})
 
-        if(productExist){
-            res.json({success: false, error: "There is already a product with that title."})
-        }else {
+        // if(productExist){
+        //     res.json({success: false, error: "There is already a product with that title."})
+        // }else {
             const newProduct = new Product({
-                title, description, image, price
+                title, description, image: nameFolderImage, price
             })
             var product = await newProduct.save()
-                res.json({
-                    success: true, product
-                })
+                // res.json({
+                //     success: true, product
+                // })
 
-        }
+        
     
 
     // addProduct: async (req, res) => {

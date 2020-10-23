@@ -12,14 +12,8 @@ host = process.env.HOST || '0.0.0.0'
 app.use(cors())
 app.use(express.json())
 app.use(fileUpload())
-app.use(express.static('client/img'))
+// app.use('/uploads', express.static(`${__dirname}/uploads`))
 
-if(process.env.NODE_ENV === 'production') {
-	app.use(express.static('client/image'))
-	app.get('*', (req, res) => {
-		res.sendFile(path.join(__dirname+'/client/build/index.html'))
-	})
-}
 
 
 app.use('/api', router)
